@@ -5,6 +5,11 @@
  */
 package views;
 
+import controllers.Controller;
+import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 /**
  *
  * @author Invitado
@@ -13,9 +18,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form MainWindow
+     *
+     * @param controller
      */
-    public MainWindow() {
+    public MainWindow(Controller controller) {
         initComponents();
+        drawingBoard = new DrawingBoard(containerPanel);
+        System.out.println("Container size is " + containerPanel.getSize());
+        containerPanel.setLayout(new BorderLayout());
+        containerPanel.add(drawingBoard, BorderLayout.CENTER);
+        addComponentsActionListener(controller);
+        setVisible(true);
     }
 
     /**
@@ -27,57 +40,257 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        headerPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        resistanceSettingsPanel = new javax.swing.JPanel();
+        bandsAmountPanel = new javax.swing.JPanel();
+        bandAmountJCB = new javax.swing.JComboBox<>();
+        bandsValuesPanel = new javax.swing.JPanel();
+        bandOneJCB = new javax.swing.JComboBox<>();
+        bandTwoJCB = new javax.swing.JComboBox<>();
+        bandThreeJCB = new javax.swing.JComboBox<>();
+        multiplicatorJCB = new javax.swing.JComboBox<>();
+        tolerance = new javax.swing.JComboBox<>();
+        ppmJCB = new javax.swing.JComboBox<>();
+        startButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        containerPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        headerPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Resistance Simulator");
+
+        javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
+        headerPanel.setLayout(headerPanelLayout);
+        headerPanelLayout.setHorizontalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        headerPanelLayout.setVerticalGroup(
+            headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+        );
+
+        resistanceSettingsPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        bandsAmountPanel.setBackground(new java.awt.Color(255, 255, 255));
+        bandsAmountPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+
+        bandAmountJCB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        bandAmountJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "6" }));
+        bandAmountJCB.addItemListener(new ItemChangeListener());
+
+        javax.swing.GroupLayout bandsAmountPanelLayout = new javax.swing.GroupLayout(bandsAmountPanel);
+        bandsAmountPanel.setLayout(bandsAmountPanelLayout);
+        bandsAmountPanelLayout.setHorizontalGroup(
+            bandsAmountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bandsAmountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bandAmountJCB, 0, 91, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        bandsAmountPanelLayout.setVerticalGroup(
+            bandsAmountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bandsAmountPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(bandAmountJCB, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        bandsValuesPanel.setBackground(new java.awt.Color(255, 255, 255));
+        bandsValuesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands' values", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+
+        bandOneJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        bandOneJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        bandTwoJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        bandTwoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        bandThreeJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        bandThreeJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        multiplicatorJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        multiplicatorJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tolerance.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        tolerance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        ppmJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        ppmJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout bandsValuesPanelLayout = new javax.swing.GroupLayout(bandsValuesPanel);
+        bandsValuesPanel.setLayout(bandsValuesPanelLayout);
+        bandsValuesPanelLayout.setHorizontalGroup(
+            bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bandsValuesPanelLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bandOneJCB, 0, 69, Short.MAX_VALUE)
+                    .addComponent(multiplicatorJCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bandTwoJCB, 0, 69, Short.MAX_VALUE)
+                    .addComponent(tolerance, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bandThreeJCB, 0, 66, Short.MAX_VALUE)
+                    .addComponent(ppmJCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        bandsValuesPanelLayout.setVerticalGroup(
+            bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bandsValuesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bandOneJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bandTwoJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bandThreeJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(bandsValuesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(multiplicatorJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tolerance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ppmJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+
+        startButton.setBackground(new java.awt.Color(153, 153, 255));
+        startButton.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        startButton.setForeground(new java.awt.Color(255, 255, 255));
+        startButton.setText("Try");
+
+        javax.swing.GroupLayout resistanceSettingsPanelLayout = new javax.swing.GroupLayout(resistanceSettingsPanel);
+        resistanceSettingsPanel.setLayout(resistanceSettingsPanelLayout);
+        resistanceSettingsPanelLayout.setHorizontalGroup(
+            resistanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(resistanceSettingsPanelLayout.createSequentialGroup()
+                .addComponent(bandsAmountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bandsValuesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(startButton)
+                .addGap(24, 24, 24))
+        );
+        resistanceSettingsPanelLayout.setVerticalGroup(
+            resistanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resistanceSettingsPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(resistanceSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bandsValuesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bandsAmountPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(resistanceSettingsPanelLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(startButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        containerPanel.setBackground(new java.awt.Color(102, 255, 102));
+
+        javax.swing.GroupLayout containerPanelLayout = new javax.swing.GroupLayout(containerPanel);
+        containerPanel.setLayout(containerPanelLayout);
+        containerPanelLayout.setHorizontalGroup(
+            containerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        containerPanelLayout.setVerticalGroup(
+            containerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(containerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resistanceSettingsPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(resistanceSettingsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainWindow().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> bandAmountJCB;
+    private javax.swing.JComboBox<String> bandOneJCB;
+    private javax.swing.JComboBox<String> bandThreeJCB;
+    private javax.swing.JComboBox<String> bandTwoJCB;
+    private javax.swing.JPanel bandsAmountPanel;
+    private javax.swing.JPanel bandsValuesPanel;
+    private javax.swing.JPanel containerPanel;
+    private javax.swing.JPanel headerPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JComboBox<String> multiplicatorJCB;
+    private javax.swing.JComboBox<String> ppmJCB;
+    private javax.swing.JPanel resistanceSettingsPanel;
+    private javax.swing.JButton startButton;
+    private javax.swing.JComboBox<String> tolerance;
     // End of variables declaration//GEN-END:variables
+
+    private DrawingBoard drawingBoard;
+
+    private void addComponentsActionListener(Controller controller) {
+
+    }
+
+    private class ItemChangeListener implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                switch (Integer.parseInt(event.getItem().toString())) {
+                    case 4:
+                        if (bandThreeJCB.isEnabled()) {
+                            bandThreeJCB.setEnabled(false);
+                        }
+                        if (ppmJCB.isEnabled()) {
+                            ppmJCB.setEnabled(false);
+                        }
+                        break;
+                    case 5:
+                        if (!bandThreeJCB.isEnabled()) {
+                            bandThreeJCB.setEnabled(true);
+                        }
+                        if (ppmJCB.isEnabled()) {
+                            ppmJCB.setEnabled(false);
+                        }
+                        break;
+                    case 6:
+                        if (!bandThreeJCB.isEnabled()) {
+                            bandThreeJCB.setEnabled(true);
+                        }
+                        if (!ppmJCB.isEnabled()) {
+                            ppmJCB.setEnabled(true);
+                        }
+                        break;
+                }
+            }
+        }
+    }
 }

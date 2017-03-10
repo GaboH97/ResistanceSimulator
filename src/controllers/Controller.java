@@ -5,10 +5,20 @@
  */
 package controllers;
 
+import models.entity.Resistance;
+import views.MainWindow;
+
 /**
  *
- * @author Invitado
+ * @author Gabriel Huertas
  */
 public class Controller {
-    
+
+    private Resistance resistance;
+    private MainWindow mainWindow;
+
+    public Controller() {
+        resistance = new Resistance();
+        mainWindow = new MainWindow(this);
+    }
 }
