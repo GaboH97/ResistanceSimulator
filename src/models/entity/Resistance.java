@@ -8,33 +8,38 @@ public class Resistance {
 
     private float tolerancePercentage;
     private byte bandAmount;
-    private double value;
-    private int ppm;
+    private double theoricalValue;
+    private double minValue;
+    private double maxValue;
+    private byte ppm;
 
     public Resistance() {
         tolerancePercentage = 0;
         bandAmount = 0;
-        value = 0;
+        theoricalValue = 0;
         ppm = 0;
     }
 
     /**
      *
+     * 
+     * 
      * @param colorCodes
-     * @return The value of the resistance
      */
-    public double calculateValue(BandColor[] bandColors) {
+    public void calculateValues(BandColor[] bandColors) {
         if (bandAmount == 4) {
-            value = ((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]);
-            tolerancePercentage = getTolerancePercentage(bandColors[3]);
+            setTheoricalValue(((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]));
+            setTolerancePercentage(getTolerancePercentage(bandColors[3]));
         } else {
-            value = ((getColorValue(bandColors[0]) * 100) + (getColorValue(bandColors[1]) * 10) + (getColorValue(bandColors[2]))) * getColorMultiplicator(bandColors[3]);
-            tolerancePercentage = getTolerancePercentage(bandColors[3]);
+            setTheoricalValue(((getColorValue(bandColors[0]) * 100) + (getColorValue(bandColors[1]) * 10) + (getColorValue(bandColors[2]))) * getColorMultiplicator(bandColors[3]));
+            setTolerancePercentage(getTolerancePercentage(bandColors[3]));
             if (bandAmount == 6) {
-                ppm = getPPMValue(bandColors[5]);
+                setPpm(getPPMValue(bandColors[5]));
             }
         }
-        return value;
+        setMaxValue(theoricalValue+(theoricalValue*tolerancePercentage));
+        setMaxValue(theoricalValue-(theoricalValue*tolerancePercentage));
+        
     }
 
     public byte getPPMValue(BandColor bandColor) {
@@ -72,17 +77,13 @@ public class Resistance {
                 tolerance = 0.1f;
                 break;
             case RED:
-                tolerance =  0.2f;
+                tolerance = 0.2f;
                 break;
             case BROWN:
-                tolerance =  0.01f;
+                tolerance = 0.01f;
                 break;
             default:
         }
-        return tolerancePercentage;
-    }
-
-    public float getTolerancePercentage() {
         return tolerancePercentage;
     }
 
@@ -157,8 +158,10 @@ public class Resistance {
         }
         return colorValue;
     }
+    
+    //====================Getters and Setters======================
 
-    public void setTolerancePercentage(byte tolerancePercentage) {
+    public void setTolerancePercentage(float tolerancePercentage) {
         this.tolerancePercentage = tolerancePercentage;
     }
 
@@ -170,19 +173,47 @@ public class Resistance {
         this.bandAmount = bandAmount;
     }
 
-    public int getPpm() {
+    public byte getPpm() {
         return ppm;
     }
 
-    public void setPpm(int ppm) {
+    public void setPpm(byte ppm) {
         this.ppm = ppm;
     }
 
-    public double getValue() {
-        return this.value;
+    public double getTheoricalValue() {
+        return this.theoricalValue;
     }
 
     public void setBandsAmount(byte bandsAmount) {
         this.bandAmount = bandsAmount;
+    }
+    
+    public float getTolerancePercentage() {
+        return tolerancePercentage;
+    }
+    
+    public void setTheoricalValue(double theoricalValue){
+        this.theoricalValue = theoricalValue;
+    }
+    
+    public double getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(double minValue) {
+        this.minValue = minValue;
+    }
+
+    public double getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(double maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public Object getResistanceValues(){
+        return new Object[]{theoricalValue,minValue,maxValue,tolerancePercentage,ppm};
     }
 }

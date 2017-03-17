@@ -7,8 +7,10 @@ package views;
 
 import controllers.Controller;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import models.entity.BandColor;
 
 /**
  *
@@ -79,7 +81,7 @@ public class MainWindow extends javax.swing.JFrame {
         resistanceSettingsPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         bandsAmountPanel.setBackground(new java.awt.Color(255, 255, 255));
-        bandsAmountPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands amount", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        bandsAmountPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands amount", 0, 0, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
 
         bandAmountJCB.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         bandAmountJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "6" }));
@@ -103,25 +105,25 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         bandsValuesPanel.setBackground(new java.awt.Color(255, 255, 255));
-        bandsValuesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands' values", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
+        bandsValuesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands' values", 0, 0, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
 
         bandOneJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        bandOneJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bandOneJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         bandTwoJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        bandTwoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bandTwoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         bandThreeJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        bandThreeJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bandThreeJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         multiplicatorJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        multiplicatorJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        multiplicatorJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tolerance.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        tolerance.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tolerance.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ppmJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        ppmJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ppmJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new BandColor[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout bandsValuesPanelLayout = new javax.swing.GroupLayout(bandsValuesPanel);
         bandsValuesPanel.setLayout(bandsValuesPanelLayout);
@@ -236,9 +238,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> bandAmountJCB;
-    private javax.swing.JComboBox<String> bandOneJCB;
-    private javax.swing.JComboBox<String> bandThreeJCB;
-    private javax.swing.JComboBox<String> bandTwoJCB;
+    private javax.swing.JComboBox<BandColor> bandOneJCB;
+    private javax.swing.JComboBox<BandColor> bandThreeJCB;
+    private javax.swing.JComboBox<BandColor> bandTwoJCB;
     private javax.swing.JPanel bandsAmountPanel;
     private javax.swing.JPanel bandsValuesPanel;
     private javax.swing.JPanel containerPanel;
@@ -246,17 +248,28 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JComboBox<String> multiplicatorJCB;
-    private javax.swing.JComboBox<String> ppmJCB;
+    private javax.swing.JComboBox<BandColor> multiplicatorJCB;
+    private javax.swing.JComboBox<BandColor> ppmJCB;
     private javax.swing.JPanel resistanceSettingsPanel;
     private javax.swing.JButton startButton;
-    private javax.swing.JComboBox<String> tolerance;
+    private javax.swing.JComboBox<BandColor> tolerance;
     // End of variables declaration//GEN-END:variables
 
     private DrawingBoard drawingBoard;
 
     private void addComponentsActionListener(Controller controller) {
 
+    }
+
+    public BandColor[] getBandColors() {
+        int bandAmount = bandAmountJCB.getSelectedIndex();
+        if(bandAmount==4){
+            return new BandColor[bandOneJCB.get]
+        }
+    }
+
+    public void showResistanceValues(Object resistanceValues) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private class ItemChangeListener implements ItemListener {

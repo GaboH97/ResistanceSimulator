@@ -6,6 +6,7 @@
 package util;
 
 import java.awt.Color;
+import models.entity.BandColor;
 
 /**
  *
@@ -25,5 +26,7 @@ public class GlobalConstants {
     public static final Color WHITE = Color.WHITE;
     public static final Color GOLD = new Color(212, 175, 55);
     public static final Color SILVER = new Color(192, 192, 192);
+    public static final BandColor[] FOUR_BAND_MULTIPLICATOR = new BandColor[]{BandColor.BLACK, BandColor.BROWN, BandColor.RED, BandColor.YELLOW, BandColor.GREEN, BandColor.BLUE, BandColor.GOLDEN, BandColor.SILVER};
+    public static final BandColor[] FIVE_OR_SIX_BAND_MULTIPLICATOR = new BandColor[]{BandColor.BLACK, BandColor.BROWN, BandColor.RED, BandColor.YELLOW, BandColor.GOLDEN, BandColor.SILVER};
 
 }
