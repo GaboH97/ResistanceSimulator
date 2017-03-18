@@ -35,6 +35,7 @@ public class Controller implements ActionListener{
 
     private void calculateResistance() {
        resistance.calculateValues(mainWindow.getBandColors());
+       System.out.println("The value of the resistance is "+resistance.getTheoricalValue());
        mainWindow.showResistanceValues(resistance.getResistanceValues());
     }
 }

@@ -6,7 +6,7 @@ package models.entity;
  */
 public class Resistance {
 
-    private float tolerancePercentage;
+    private double tolerancePercentage;
     private byte bandAmount;
     private double theoricalValue;
     private double minValue;
@@ -27,7 +27,8 @@ public class Resistance {
      * @param colorCodes
      */
     public void calculateValues(BandColor[] bandColors) {
-        if (bandAmount == 4) {
+        System.out.println(bandColors[0].toString()+bandColors[1].toString()+bandColors[2].toString()+bandColors[3].toString());
+        if (bandAmount == 4) {                    
             setTheoricalValue(((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]));
             setTolerancePercentage(getTolerancePercentage(bandColors[3]));
         } else {
@@ -67,20 +68,19 @@ public class Resistance {
         return ppmValue;
     }
 
-    public float getTolerancePercentage(BandColor bandColor) {
-        float tolerance = 0;
+    public double getTolerancePercentage(BandColor bandColor) {
         switch (bandColor) {
             case GOLDEN:
-                tolerance = 0.05f;
+                tolerancePercentage = 0.05;
                 break;
             case SILVER:
-                tolerance = 0.1f;
+                tolerancePercentage = 0.1;
                 break;
             case RED:
-                tolerance = 0.2f;
+                tolerancePercentage = 0.2;
                 break;
             case BROWN:
-                tolerance = 0.01f;
+                tolerancePercentage = 0.01;
                 break;
             default:
         }
@@ -161,7 +161,7 @@ public class Resistance {
     
     //====================Getters and Setters======================
 
-    public void setTolerancePercentage(float tolerancePercentage) {
+    public void setTolerancePercentage(double tolerancePercentage) {
         this.tolerancePercentage = tolerancePercentage;
     }
 
@@ -189,7 +189,7 @@ public class Resistance {
         this.bandAmount = bandsAmount;
     }
     
-    public float getTolerancePercentage() {
+    public double getTolerancePercentage() {
         return tolerancePercentage;
     }
     

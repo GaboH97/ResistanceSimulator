@@ -1,11 +1,11 @@
 package views;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import javax.swing.JPanel;
+import models.entity.BandColor;
 import models.entity.Resistance;
 
 /**
@@ -22,7 +22,7 @@ public class DrawingBoard extends JPanel {
     private int bodyHeight;
     private Point centerPoint;
     private int bandGap;
-    private Resistance resistance;
+    private BandColor[] bandColors;
 
     public DrawingBoard(JPanel parentContainer) {
 
@@ -43,8 +43,8 @@ public class DrawingBoard extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         drawResistance(g);
-        if (resistance != null) {
-
+        if (bandColors != null) {
+            
         }
     }
 
@@ -63,6 +63,7 @@ public class DrawingBoard extends JPanel {
         //Draw cupper wires
         g.fillRect(centerPoint.x - bodyWidth - ((int) (diameter / 2)), centerPoint.y - (thickness / 2), bodyWidth / 2, thickness);
         g.fillRect(centerPoint.x + (bodyWidth / 2) + ((int) (diameter / 2)), centerPoint.y - (thickness / 2), bodyWidth / 2, thickness);
+        
     }
 
     /**
@@ -71,8 +72,13 @@ public class DrawingBoard extends JPanel {
      *
      * @return
      */
-    public int calculateGap() {
-        return (resistance.getBandAmount() == 6) ? (bodyWidth - (4 * bandWidth)) / 4 : (bodyWidth - (3 * bandWidth)) / 3;
+    public int calculateGap(int bandAmount) {
+        return (bandAmount == 6) ? (bodyWidth - (4 * bandWidth)) / 4 : (bodyWidth - (3 * bandWidth)) / 3;
+    }
+    
+    public void drawResistance(BandColor bandColor[]){
+        this.bandColors=bandColor;
+        repaint();
     }
 
 }
