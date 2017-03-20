@@ -28,13 +28,12 @@ public class Resistance {
      */
     public void calculateValues(BandColor[] bandColors) {
         resetValues();
-        // System.out.println(bandColors[0].toString() + bandColors[1].toString() + bandColors[2].toString() + bandColors[3].toString()+ bandColors[4].toString()+  bandColors[5].toString());
-        for (BandColor bandColor : bandColors) {
-            System.out.print(bandColor.toString()+" ");
-        }
-        
+        System.out.println(bandColors[0].toString() + bandColors[1].toString() + bandColors[2].toString() + bandColors[3].toString());
+
+        System.out.println("Penetro aquí aaaaaaaaaaaaaaaaaa" + bandColors[2]);
+
         if (bandAmount == 4) {
-            System.out.println("Penetro aquí");
+            System.out.println("Penetro aquí aaaaaaaaaaaaaaaaaa");
             setTheoricalValue(((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]));
             setTolerancePercentage(getTolerancePercentage(bandColors[3]));
         } else {
@@ -94,7 +93,7 @@ public class Resistance {
     }
 
     public double getColorMultiplicator(BandColor bandColor) {
-        System.out.println("The fucking band is "+ bandColor.toString());
+        System.out.println("The fucking band is " + bandColor.toString());
         double multiplicator = 0;
         switch (bandColor) {
             case BLACK:
