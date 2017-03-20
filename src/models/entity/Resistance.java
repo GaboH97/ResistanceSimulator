@@ -2,7 +2,8 @@ package models.entity;
 
 /**
  *
- * @author Gabriel Huertas
+ * @author Huertas G., Quintero. J
+ * @version 1.0
  */
 public class Resistance {
 
@@ -21,33 +22,63 @@ public class Resistance {
     }
 
     /**
-     *
-     *
+     * This method calculates: Theorical value, minium possible value, maxium
+     * possible value, tolerance percentage and PPM (If required) given a vector
+     * of bandColors
      *
      * @param colorCodes
      */
     public void calculateValues(BandColor[] bandColors) {
+        /*Reset all values to zero, avoids overwriting values*/
         resetValues();
-        System.out.println(bandColors[0].toString() + bandColors[1].toString() + bandColors[2].toString() + bandColors[3].toString());
-
-        System.out.println("Penetro aquí aaaaaaaaaaaaaaaaaa" + bandColors[2]);
-
+        /*Set bands amount value*/
+        setBandsAmount((byte) bandColors.length);
+        /**
+         * Once the band amount field is set, values from the band color array
+         * are calculated given band amount and
+         *
+         * 4-band resistance band color pattern {1st significative figure, 2nd
+         * significative figure, multiplicator, tolerance percentage}
+         *
+         * 5-band resistance band color pattern {1st significative figure, 2nd
+         * significative figure,3rd significative figure, multiplicator,
+         * tolerance percentage}
+         *
+         * 6-band resistance band color pattern {1st significative figure, 2nd
+         * significative figure,3rd significative figure, multiplicator,
+         * tolerance percentage,PPM}
+         *
+         */
         if (bandAmount == 4) {
-            System.out.println("Penetro aquí aaaaaaaaaaaaaaaaaa");
-            setTheoricalValue(((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]));
+            setTheoricalValue(((getColorValue(bandColors[0]) * 10)
+                    + getColorValue(bandColors[1]))
+                    * getColorMultiplicator(bandColors[2]));
             setTolerancePercentage(getTolerancePercentage(bandColors[3]));
         } else {
-            setTheoricalValue(((getColorValue(bandColors[0]) * 100) + (getColorValue(bandColors[1]) * 10) + (getColorValue(bandColors[2]))) * getColorMultiplicator(bandColors[3]));
-            setTolerancePercentage(getTolerancePercentage(bandColors[3]));
+            setTheoricalValue(((getColorValue(bandColors[0]) * 100)
+                    + (getColorValue(bandColors[1]) * 10)
+                    + (getColorValue(bandColors[2])))
+                    * getColorMultiplicator(bandColors[3]));
+            setTolerancePercentage(getTolerancePercentage(bandColors[4]));
             if (bandAmount == 6) {
                 setPpm(getPPMValue(bandColors[5]));
             }
         }
+
+        /**
+         * Calculates both maximum and minimum values according to the theorical
+         * value and tolerance percentage;
+         */
         setMaxValue(theoricalValue + (theoricalValue * tolerancePercentage));
         setMinValue(theoricalValue - (theoricalValue * tolerancePercentage));
 
     }
-
+    
+    /**
+     * 
+     * @param bandColor
+     * @return the PPM value given the bandColor parameter
+     */
     public byte getPPMValue(BandColor bandColor) {
         byte ppmValue = 0;
         switch (bandColor) {
@@ -72,7 +103,12 @@ public class Resistance {
         }
         return ppmValue;
     }
-
+    
+    /**
+     * 
+     * @param bandColor
+     * @return The tolerance percentage given the bandColor param 
+     */
     public double getTolerancePercentage(BandColor bandColor) {
         switch (bandColor) {
             case GOLDEN:
@@ -91,9 +127,13 @@ public class Resistance {
         }
         return tolerancePercentage;
     }
-
+    
+    /**
+     * 
+     * @param bandColor
+     * @return The multiplicator value given the bandColor param
+     */
     public double getColorMultiplicator(BandColor bandColor) {
-        System.out.println("The fucking band is " + bandColor.toString());
         double multiplicator = 0;
         switch (bandColor) {
             case BLACK:
@@ -126,13 +166,20 @@ public class Resistance {
             default:
                 break;
         }
-        System.out.println("The fucking multiplicator is " + multiplicator);
         return multiplicator;
     }
-
+    
+    /**
+     * 
+     * @param bandColor
+     * @return the value of the significate figure given the bandColor param
+     */
     public byte getColorValue(BandColor bandColor) {
-        byte colorValue;
+        byte colorValue = 0;
         switch (bandColor) {
+            case BLACK:
+                colorValue = 0;
+                break;
             case BROWN:
                 colorValue = 1;
                 break;
@@ -160,8 +207,6 @@ public class Resistance {
             case WHITE:
                 colorValue = 9;
                 break;
-            default:
-                colorValue = 0;
         }
         return colorValue;
     }
@@ -170,15 +215,19 @@ public class Resistance {
     public void setTolerancePercentage(double tolerancePercentage) {
         this.tolerancePercentage = tolerancePercentage;
     }
-
+    
+    /**
+     * 
+     * @return The value of the bandAmount field of this class 
+     */
     public byte getBandAmount() {
         return bandAmount;
     }
-
-    public void setBandAmount(byte bandAmount) {
-        this.bandAmount = bandAmount;
-    }
-
+    
+    /**
+     * 
+     * @return The value of the ppm field of this class 
+     */
     public byte getPpm() {
         return ppm;
     }
@@ -186,7 +235,11 @@ public class Resistance {
     public void setPpm(byte ppm) {
         this.ppm = ppm;
     }
-
+    
+     /**
+     * 
+     * @return The value of the theoricalValue field of this class 
+     */
     public double getTheoricalValue() {
         return this.theoricalValue;
     }
@@ -194,7 +247,11 @@ public class Resistance {
     public void setBandsAmount(byte bandsAmount) {
         this.bandAmount = bandsAmount;
     }
-
+    
+     /**
+     * 
+     * @return The value of the tolerancePercentage field of this class 
+     */
     public double getTolerancePercentage() {
         return tolerancePercentage;
     }
@@ -202,7 +259,11 @@ public class Resistance {
     public void setTheoricalValue(double theoricalValue) {
         this.theoricalValue = theoricalValue;
     }
-
+    
+     /**
+     * 
+     * @return The value of the minValue field of this class 
+     */
     public double getMinValue() {
         return minValue;
     }
@@ -210,7 +271,11 @@ public class Resistance {
     public void setMinValue(double minValue) {
         this.minValue = minValue;
     }
-
+    
+     /**
+     * 
+     * @return The value of the maxValue field of this class 
+     */
     public double getMaxValue() {
         return maxValue;
     }
@@ -218,11 +283,19 @@ public class Resistance {
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
-
+    
+    /**
+     * 
+     * @return An object array containing the values of the attributes
+     *         of the resistance
+     */
     public Object[] getResistanceValues() {
         return new Object[]{theoricalValue, minValue, maxValue, tolerancePercentage, ppm};
     }
-
+    
+    /**
+     * Resets all the values of the fields to zero
+     */
     public void resetValues() {
         theoricalValue = 0;
         minValue = 0;

@@ -1,23 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import controllers.Actions;
 import controllers.Controller;
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import models.entity.BandColor;
 import util.GlobalConstants;
 
 /**
  *
- * @author Invitado
+ * @author Huertas G., Quintero. J
+ * @version 1.0
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -28,8 +25,9 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow(Controller controller) {
         initComponents();
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setLocationRelativeTo(null);
         drawingBoard = new DrawingBoard(resistanceInfoPanel);
-        System.out.println("Container size is " + resistanceInfoPanel.getSize());
         resistanceInfoPanel.setLayout(new BorderLayout());
         resistanceInfoPanel.add(drawingBoard, BorderLayout.CENTER);
         addComponentsActionListener(controller);
@@ -67,8 +65,11 @@ public class MainWindow extends javax.swing.JFrame {
         minValueJTF = new javax.swing.JTextField();
         maxValueJTF = new javax.swing.JTextField();
         tolerancePercentageJTF = new javax.swing.JTextField();
+        jSeparator3 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Resistance Simulator");
+        setIconImage(new ImageIcon(getClass().getResource("/util/resistance.png")).getImage());
 
         headerPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
         bandsValuesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Bands' values", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 12))); // NOI18N
 
         bandOneJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        bandOneJCB.setModel(new javax.swing.DefaultComboBoxModel<>(BandColor.values()));
+        bandOneJCB.setModel(new javax.swing.DefaultComboBoxModel<>(GlobalConstants.FIRST_BAND_COLORS));
 
         bandTwoJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         bandTwoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(BandColor.values()));
@@ -133,6 +134,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         ppmJCB.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
         ppmJCB.setModel(new javax.swing.DefaultComboBoxModel<>(GlobalConstants.PPM_BANDCOLOR));
+        ppmJCB.setEnabled(false);
 
         javax.swing.GroupLayout bandsValuesPanelLayout = new javax.swing.GroupLayout(bandsValuesPanel);
         bandsValuesPanel.setLayout(bandsValuesPanelLayout);
@@ -169,8 +171,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        startButton.setBackground(new java.awt.Color(153, 153, 255));
-        startButton.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        bandThreeJCB.setEnabled(false);
+
+        startButton.setBackground(new java.awt.Color(153, 204, 255));
+        startButton.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         startButton.setForeground(new java.awt.Color(255, 255, 255));
         startButton.setText("Try");
 
@@ -182,7 +186,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(bandsAmountPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bandsValuesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(startButton)
                 .addGap(24, 24, 24))
         );
@@ -199,7 +203,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        resistanceInfoPanel.setBackground(new java.awt.Color(102, 255, 102));
+        resistanceInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout resistanceInfoPanelLayout = new javax.swing.GroupLayout(resistanceInfoPanel);
         resistanceInfoPanel.setLayout(resistanceInfoPanelLayout);
@@ -211,6 +215,8 @@ public class MainWindow extends javax.swing.JFrame {
             resistanceInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 245, Short.MAX_VALUE)
         );
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         theoricalValueJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theorical Value", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
 
@@ -248,7 +254,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(theoricalValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(minValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,8 +262,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tolerancePercentageJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PPMJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(PPMJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -272,7 +277,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(resistanceSettingsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator3))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -287,6 +293,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resistanceInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -309,6 +317,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField maxValueJTF;
     private javax.swing.JTextField minValueJTF;
     private javax.swing.JComboBox<BandColor> multiplicatorJCB;
@@ -321,16 +330,16 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField tolerancePercentageJTF;
     // End of variables declaration//GEN-END:variables
 
-    private DrawingBoard drawingBoard;
-
+    private final DrawingBoard drawingBoard;
+    
     private void addComponentsActionListener(Controller controller) {
         startButton.addActionListener(controller);
         startButton.setActionCommand(Actions.CALCULATE_RESISTANCE.name());
     }
-
+    
     public BandColor[] getBandColors() {
         byte bandAmount = (byte) bandAmountJCB.getSelectedItem();
-        System.out.println("Es de "+bandAmount+" bandas");
+        System.out.println("Es de " + bandAmount + " bandas");
         if (bandAmount == 4) {
             return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem()};
         } else if (bandAmount == 5) {
@@ -339,7 +348,7 @@ public class MainWindow extends javax.swing.JFrame {
             return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor) bandThreeJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem(), (BandColor) ppmJCB.getSelectedItem()};
         }
     }
-
+    
     public void showResistanceValues(Object[] resistanceValues, BandColor[] bandColors) {
         theoricalValueJTF.setText("" + resistanceValues[0]);
         minValueJTF.setText("" + resistanceValues[1]);
@@ -348,9 +357,9 @@ public class MainWindow extends javax.swing.JFrame {
         PPMJTF.setText("" + resistanceValues[4]);
         drawingBoard.drawResistance(bandColors);
     }
-
+    
     private class ItemChangeListener implements ItemListener {
-
+        
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {

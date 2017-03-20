@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.entity;
 
 /**
  *
- * @author Gabriel Huertas
+ * @author Huertas G., Quintero. J
+ * @version 1.0
  */
 public enum BandColor {
     BLACK, BROWN, RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, GRAY, WHITE, GOLDEN, SILVER;

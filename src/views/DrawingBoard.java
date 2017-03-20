@@ -6,11 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import javax.swing.JPanel;
 import models.entity.BandColor;
-import models.entity.Resistance;
 
 /**
  *
- * @author Gabriel Huertas
+ * @author Huertas G., Quintero. J
+ * @version 1.0
  */
 public class DrawingBoard extends JPanel {
 
@@ -23,7 +23,8 @@ public class DrawingBoard extends JPanel {
     private Point centerPoint;
     private int bandGap;
     private BandColor[] bandColors;
-
+    private int diameter;
+    
     public DrawingBoard(JPanel parentContainer) {
 
         setPreferredSize(parentContainer.getPreferredSize());
@@ -34,6 +35,8 @@ public class DrawingBoard extends JPanel {
         boardHeight = getHeight();
         bodyWidth = boardWidth / 3;
         bodyHeight = boardHeight / 5;
+        bandWidth = bodyWidth / 8;
+        diameter = (int) (bodyHeight * 1.5);
         centerPoint = new Point(boardWidth / 2, boardHeight / 2);
         bandColors = null;
         bandGap = 0;
@@ -45,10 +48,7 @@ public class DrawingBoard extends JPanel {
         super.paint(g);
         drawResistance(g);
         if (bandColors != null) {
-            for (int i = 0; i < bandColors.length; i++) {
-                g.setColor(getColorOfBand(bandColors[i]));
-                g.fillRect(centerPoint.x - (bodyWidth / 2) + (i * bandGap), centerPoint.y - (bodyHeight / 2), 15, bodyHeight);
-            }
+            drawResistance(g, bandColors.length);
         }
     }
 
@@ -57,7 +57,7 @@ public class DrawingBoard extends JPanel {
 
         //Drawing Resistance Body
         g.setColor(new Color(236, 209, 76));
-        int diameter = (int) (bodyHeight * 1.5);
+
         g.fillRect(centerPoint.x - (bodyWidth / 2), centerPoint.y - (bodyHeight / 2), bodyWidth, bodyHeight);
         g.fillArc(centerPoint.x - (bodyWidth / 2) - ((int) (diameter / 2)), centerPoint.y - ((int) (diameter / 2)), diameter, diameter, 45, ARC_ANGLE);
         g.fillArc(centerPoint.x + (bodyWidth / 2) - ((int) (diameter / 2)), centerPoint.y - ((int) (diameter / 2)), diameter, diameter, 135, -ARC_ANGLE);
@@ -77,17 +77,43 @@ public class DrawingBoard extends JPanel {
      * @return
      */
     public int calculateGap(int bandAmount) {
-        return (bandAmount == 6) ? (bodyWidth - (4 * bandWidth)) / 4 : (bodyWidth - (3 * bandWidth)) / 3;
+        int auxBodyWidth = bodyWidth - diameter;
+        return (bandAmount == 6) ? (auxBodyWidth - (4 * bandWidth)) / 4 : (auxBodyWidth - (3 * bandWidth)) / 3;
     }
 
     public void drawResistance(BandColor bandColor[]) {
         this.bandColors = bandColor;
-        setBandGap(bandGap);
+        setBandGap(calculateGap(bandColors.length));
         repaint();
     }
 
     public void setBandGap(int bandGap) {
         this.bandGap = bandGap;
+    }
+
+    public void drawResistance(Graphics g, int bandAmount) {
+        if (bandAmount == 4) {
+            for (int i = 0; i < bandAmount - 1; i++) {
+                g.setColor(getColorOfBand(bandColors[i]));
+                g.fillRect(centerPoint.x - (bodyWidth / 2) + (diameter / 2) + (i * (bandGap + bandWidth)), centerPoint.y - (bodyHeight / 2), bandWidth, bodyHeight);
+            }
+            g.setColor(getColorOfBand(bandColors[3]));
+            g.fillRect(centerPoint.x + (int) (bodyWidth / 2) - (int) (bandWidth / 2), centerPoint.y - (diameter / 2), bandWidth, diameter);
+        } else {
+            g.setColor(getColorOfBand(bandColors[0]));
+            g.fillRect(centerPoint.x - (int) (bodyWidth / 2) - (int) (diameter / 2) + (int) bandWidth, centerPoint.y - (diameter / 2), bandWidth, diameter);
+            for (int i = 1; i < bandAmount - 1; i++) {
+                g.setColor(getColorOfBand(bandColors[i]));
+                g.fillRect(centerPoint.x - (bodyWidth / 2) + (diameter / 2) + ((i - 1) * (bandGap + bandWidth)), centerPoint.y - (bodyHeight / 2), bandWidth, bodyHeight);
+            }
+            if (bandAmount == 5) {
+                g.setColor(getColorOfBand(bandColors[4]));
+                g.fillRect(centerPoint.x + (int) (bodyWidth / 2) - (int) (bandWidth / 2), centerPoint.y - (diameter / 2), bandWidth, diameter);
+            } else {
+                g.setColor(getColorOfBand(bandColors[5]));
+                g.fillRect(centerPoint.x + (int) (bodyWidth / 2) - (int) (bandWidth / 2), centerPoint.y - (diameter / 2), bandWidth, diameter);
+            }
+        }
     }
 
     public Color getColorOfBand(BandColor bandColor) {

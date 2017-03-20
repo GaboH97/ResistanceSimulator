@@ -4,15 +4,12 @@ import controllers.Controller;
 
 /**
  *
- * @author Gabriel Huertas
+ * @author Huertas G., Quintero. J
+ * @version 1.0
  */
 public class ResistanceSimulator {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         new Controller();
     }
-
 }
