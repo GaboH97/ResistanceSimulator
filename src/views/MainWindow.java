@@ -212,36 +212,52 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 245, Short.MAX_VALUE)
         );
 
+        theoricalValueJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Theorical Value", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
+
+        PPMJTF.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        PPMJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PPM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
+
+        minValueJTF.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        minValueJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Minium Value", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
+
+        maxValueJTF.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        maxValueJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Maxium Value", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
+
+        tolerancePercentageJTF.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        tolerancePercentageJTF.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tolerance (%)", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(theoricalValueJTF)
-                    .addComponent(tolerancePercentageJTF, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
-                .addGap(100, 100, 100)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(minValueJTF, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                    .addComponent(PPMJTF))
+                .addComponent(theoricalValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(minValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(maxValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addComponent(maxValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(tolerancePercentageJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80)
+                .addComponent(PPMJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(theoricalValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(theoricalValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(minValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maxValueJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PPMJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tolerancePercentageJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tolerancePercentageJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PPMJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,18 +329,24 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     public BandColor[] getBandColors() {
-        int bandAmount = bandAmountJCB.getSelectedIndex();
+        byte bandAmount = (byte) bandAmountJCB.getSelectedItem();
+        System.out.println("Es de "+bandAmount+" bandas");
         if (bandAmount == 4) {
             return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem()};
         } else if (bandAmount == 5) {
-             return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor)bandThreeJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem()};
+            return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor) bandThreeJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem()};
         } else {
-            return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor)bandThreeJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem(),(BandColor)ppmJCB.getSelectedItem()};
+            return new BandColor[]{(BandColor) bandOneJCB.getSelectedItem(), (BandColor) bandTwoJCB.getSelectedItem(), (BandColor) bandThreeJCB.getSelectedItem(), (BandColor) multiplicatorJCB.getSelectedItem(), (BandColor) tolerance.getSelectedItem(), (BandColor) ppmJCB.getSelectedItem()};
         }
     }
 
-    public void showResistanceValues(Object resistanceValues) {
-      
+    public void showResistanceValues(Object[] resistanceValues, BandColor[] bandColors) {
+        theoricalValueJTF.setText("" + resistanceValues[0]);
+        minValueJTF.setText("" + resistanceValues[1]);
+        maxValueJTF.setText("" + resistanceValues[2]);
+        tolerancePercentageJTF.setText("" + resistanceValues[3]);
+        PPMJTF.setText("" + resistanceValues[4]);
+        drawingBoard.drawResistance(bandColors);
     }
 
     private class ItemChangeListener implements ItemListener {

@@ -35,6 +35,7 @@ public class DrawingBoard extends JPanel {
         bodyWidth = boardWidth / 3;
         bodyHeight = boardHeight / 5;
         centerPoint = new Point(boardWidth / 2, boardHeight / 2);
+        bandColors = null;
         bandGap = 0;
 
     }
@@ -44,7 +45,10 @@ public class DrawingBoard extends JPanel {
         super.paint(g);
         drawResistance(g);
         if (bandColors != null) {
-            
+            for (int i = 0; i < bandColors.length; i++) {
+                g.setColor(getColorOfBand(bandColors[i]));
+                g.fillRect(centerPoint.x - (bodyWidth / 2) + (i * bandGap), centerPoint.y - (bodyHeight / 2), 15, bodyHeight);
+            }
         }
     }
 
@@ -63,7 +67,7 @@ public class DrawingBoard extends JPanel {
         //Draw cupper wires
         g.fillRect(centerPoint.x - bodyWidth - ((int) (diameter / 2)), centerPoint.y - (thickness / 2), bodyWidth / 2, thickness);
         g.fillRect(centerPoint.x + (bodyWidth / 2) + ((int) (diameter / 2)), centerPoint.y - (thickness / 2), bodyWidth / 2, thickness);
-        
+
     }
 
     /**
@@ -75,10 +79,60 @@ public class DrawingBoard extends JPanel {
     public int calculateGap(int bandAmount) {
         return (bandAmount == 6) ? (bodyWidth - (4 * bandWidth)) / 4 : (bodyWidth - (3 * bandWidth)) / 3;
     }
-    
-    public void drawResistance(BandColor bandColor[]){
-        this.bandColors=bandColor;
+
+    public void drawResistance(BandColor bandColor[]) {
+        this.bandColors = bandColor;
+        setBandGap(bandGap);
         repaint();
+    }
+
+    public void setBandGap(int bandGap) {
+        this.bandGap = bandGap;
+    }
+
+    public Color getColorOfBand(BandColor bandColor) {
+        Color color = null;
+        switch (bandColor) {
+            case BLACK:
+                color = Color.BLACK;
+                break;
+            case BROWN:
+                color = new Color(128, 0, 0);
+                break;
+            case RED:
+                color = new Color(242, 8, 8);
+                break;
+            case ORANGE:
+                color = new Color(255, 162, 0);
+                break;
+            case YELLOW:
+                color = Color.YELLOW;
+                break;
+            case GREEN:
+                color = new Color(48, 228, 35);
+                break;
+            case BLUE:
+                color = new Color(35, 55, 228);
+                break;
+            case PURPLE:
+                color = new Color(157, 35, 228);
+                break;
+            case GRAY:
+                color = Color.GRAY;
+                break;
+            case WHITE:
+                color = Color.WHITE;
+                break;
+            case GOLDEN:
+                color = new Color(212, 175, 55);
+                break;
+            case SILVER:
+                color = new Color(192, 192, 192);
+                break;
+            default:
+                break;
+        }
+        return color;
     }
 
 }

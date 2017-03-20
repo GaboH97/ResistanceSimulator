@@ -22,13 +22,19 @@ public class Resistance {
 
     /**
      *
-     * 
-     * 
+     *
+     *
      * @param colorCodes
      */
     public void calculateValues(BandColor[] bandColors) {
-        System.out.println(bandColors[0].toString()+bandColors[1].toString()+bandColors[2].toString()+bandColors[3].toString());
-        if (bandAmount == 4) {                    
+        resetValues();
+        // System.out.println(bandColors[0].toString() + bandColors[1].toString() + bandColors[2].toString() + bandColors[3].toString()+ bandColors[4].toString()+  bandColors[5].toString());
+        for (BandColor bandColor : bandColors) {
+            System.out.print(bandColor.toString()+" ");
+        }
+        
+        if (bandAmount == 4) {
+            System.out.println("Penetro aquí");
             setTheoricalValue(((getColorValue(bandColors[0]) * 10) + getColorValue(bandColors[1])) * getColorMultiplicator(bandColors[2]));
             setTolerancePercentage(getTolerancePercentage(bandColors[3]));
         } else {
@@ -38,9 +44,9 @@ public class Resistance {
                 setPpm(getPPMValue(bandColors[5]));
             }
         }
-        setMaxValue(theoricalValue+(theoricalValue*tolerancePercentage));
-        setMaxValue(theoricalValue-(theoricalValue*tolerancePercentage));
-        
+        setMaxValue(theoricalValue + (theoricalValue * tolerancePercentage));
+        setMinValue(theoricalValue - (theoricalValue * tolerancePercentage));
+
     }
 
     public byte getPPMValue(BandColor bandColor) {
@@ -88,6 +94,7 @@ public class Resistance {
     }
 
     public double getColorMultiplicator(BandColor bandColor) {
+        System.out.println("The fucking band is "+ bandColor.toString());
         double multiplicator = 0;
         switch (bandColor) {
             case BLACK:
@@ -111,15 +118,16 @@ public class Resistance {
             case BLUE:
                 multiplicator = 1000000;
                 break;
-            case PURPLE:
+            case GOLDEN:
                 multiplicator = 0.1;
                 break;
-            case GRAY:
+            case SILVER:
                 multiplicator = 0.01;
                 break;
             default:
                 break;
         }
+        System.out.println("The fucking multiplicator is " + multiplicator);
         return multiplicator;
     }
 
@@ -158,9 +166,8 @@ public class Resistance {
         }
         return colorValue;
     }
-    
-    //====================Getters and Setters======================
 
+    //====================Getters and Setters======================
     public void setTolerancePercentage(double tolerancePercentage) {
         this.tolerancePercentage = tolerancePercentage;
     }
@@ -188,15 +195,15 @@ public class Resistance {
     public void setBandsAmount(byte bandsAmount) {
         this.bandAmount = bandsAmount;
     }
-    
+
     public double getTolerancePercentage() {
         return tolerancePercentage;
     }
-    
-    public void setTheoricalValue(double theoricalValue){
+
+    public void setTheoricalValue(double theoricalValue) {
         this.theoricalValue = theoricalValue;
     }
-    
+
     public double getMinValue() {
         return minValue;
     }
@@ -213,7 +220,15 @@ public class Resistance {
         this.maxValue = maxValue;
     }
 
-    public Object getResistanceValues(){
-        return new Object[]{theoricalValue,minValue,maxValue,tolerancePercentage,ppm};
+    public Object[] getResistanceValues() {
+        return new Object[]{theoricalValue, minValue, maxValue, tolerancePercentage, ppm};
+    }
+
+    public void resetValues() {
+        theoricalValue = 0;
+        minValue = 0;
+        maxValue = 0;
+        tolerancePercentage = 0;
+        ppm = 0;
     }
 }
